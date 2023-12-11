@@ -3,7 +3,8 @@ from ex00.sigmoid import sigmoid_
 
 
 def logistic_predict_(x, theta):
-    """Computes the vector of prediction y_hat from two non-empty numpy.ndarray.
+    """
+    Computes the vector of prediction y_hat from two non-empty numpy.ndarray.
     Args:
         x: has to be an numpy.ndarray, a vector of dimension m * n.
         theta: has to be an numpy.ndarray, a vector of dimension (n + 1) * 1.
