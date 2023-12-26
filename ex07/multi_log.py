@@ -3,7 +3,49 @@ import sys
 import pandas as pd
 import matplotlib.pyplot as plt
 from ex06.my_logistic_regression import MyLogisticRegression as MyLR
-from ex07.mono_log import data_spliter
+
+
+
+def data_spliter(x, y, proportion, seed=42):
+    """
+    Shuffles and splits the dataset (given by x and y) into a training and a test set,
+    while respecting the given proportion of examples to be kept in the training set.
+    Args:
+      x: numpy.array, a matrix of dimension m * n.
+      y: numpy.array, a vector of dimension m * 1.
+      proportion: float, the proportion of the dataset that will be assigned to the training set.
+    Return:
+      (x_train, x_test, y_train, y_test) as a tuple of numpy.array
+      None if x or y is an empty numpy.array.
+      None if x and y do not share compatible dimensions.
+      None if x, y or proportion is not of expected type.
+    Raises:
+      This function should not raise any Exception.
+    """
+    if (
+        not isinstance(x, np.ndarray)
+        or not isinstance(y, np.ndarray)
+        or not isinstance(proportion, float)
+    ):
+        return None
+    if x.size == 0 or y.size == 0 or x.shape[0] != y.shape[0]:
+        return None
+    
+    # using the same random seed for reproducibility
+    np.random.seed(seed)
+
+    # Combine x and y and shuffle
+    combined = np.hstack((x, y.reshape(-1, 1)))
+    np.random.shuffle(combined)
+
+    # Split the combined array back into x and y
+    split_idx = int(combined.shape[0] * proportion)
+    x_train = combined[:split_idx, :-1]
+    x_test = combined[split_idx:, :-1]
+    y_train = combined[:split_idx, -1:]
+    y_test = combined[split_idx:, -1:]
+
+    return (x_train, x_test, y_train, y_test)
 
 
 def multi_log():
@@ -23,6 +65,8 @@ def multi_log():
 
         # Split data
         x_train, x_test, y_train, y_test = data_spliter(x, y, 0.8)
+        y = np.array(solar_system_census_planets["Origin"])
+        x_train_no, x_test_no, y_train_no, y_test = data_spliter(x, y, 0.8)
 
         # Scale data
         x_min = x_train.min(axis=0)
@@ -47,6 +91,8 @@ def multi_log():
         [predicted_probabilities_dict[zipcode] for zipcode in range(5)]
     )
 
+    print("all_probabilities.shape:", all_probabilities.shape)
+
     # Print the first few rows of all_probabilities for checking
     print("First few rows of all_probabilities:\n", all_probabilities[:5])
 
@@ -56,18 +102,23 @@ def multi_log():
     # Print the first few predicted classes for checking
     print("First few predicted classes:\n", predicted_classes[:5])
 
-    # Calculate and display the accuracy
-    y = np.array(solar_system_census_planets["Origin"])
-    y = y.reshape(-1, 1)
-
     # Split data
-    predicted_classes = predicted_classes.astype(int)
-    correct_predictions = np.sum(y.flatten() == predicted_classes)
-    print("y",y.flatten())
-    print("predicted_classes",predicted_classes)
-    total_predictions = len(y)
+    y_test = y_test.astype(int)
+
+    # After converting y_test to int
+    print("y_test:", y_test.flatten())
+    print("predicted_classes:", predicted_classes)
+
+    # Calculate correct predictions
+    correct_predictions = np.sum(y_test.flatten() == predicted_classes)
+    print("correct_predictions:", correct_predictions)
+
+    # Calculate total predictions and accuracy
+    total_predictions = len(y_test.flatten())
     accuracy = correct_predictions / total_predictions
+    print("Total Predictions:", total_predictions)
     print("Accuracy:", accuracy)
+
 
     # Plotting
     feature_pairs = [
