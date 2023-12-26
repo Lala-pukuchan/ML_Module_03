@@ -1,6 +1,7 @@
 import numpy as np
 from ex01.log_pred import logistic_predict_
 from ex02.log_loss import log_loss_
+print("\n-------------\n")
 
 print("Example 1:")
 y1 = np.array([1]).reshape((-1, 1))
@@ -10,6 +11,7 @@ y_hat1 = logistic_predict_(x1, theta1)
 loss_value = log_loss_(y1, y_hat1)
 print("log_loss_1     : {:.12f} ".format(loss_value))
 print("expected output:", 0.01814992791780)
+print("\n-------------\n")
 
 print("\nExample 2:")
 y2 = np.array([[1], [0], [1], [0], [1]])
@@ -18,6 +20,7 @@ theta2 = np.array([[2], [0.5]])
 y_hat2 = logistic_predict_(x2, theta2)
 print("log_loss_2     : {:.12f} ".format(log_loss_(y2, y_hat2)))
 print("expected output:", 2.482501160247)
+print("\n-------------\n")
 
 print("\nExample 3:")
 y3 = np.array([[0], [1], [1]])
