@@ -12,6 +12,14 @@ class MyLogisticRegression:
         Description:
             generator of the class, initialize self.
         """
+        # error management
+        if not isinstance(alpha, float) or alpha <= 0:
+            raise ValueError("Alpha must be a positive float")
+        if not isinstance(max_iter, int) or max_iter <= 0:
+            raise ValueError("max_iter must be a positive integer")
+        if not isinstance(theta, (list, np.ndarray)):
+            raise TypeError("Theta must be a list or numpy array")
+
         self.theta = theta
         self.alpha = alpha
         self.max_iter = max_iter

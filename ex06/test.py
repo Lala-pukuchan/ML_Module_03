@@ -10,18 +10,21 @@ thetas = np.array([[2], [0.5], [7.1], [-4.3], [2.09]])
 mylr = MyLR(thetas)
 
 # Example 0: Predict
+print("\n-------------\n")
 print("Example 0:")
 predicted_0 = mylr.predict_(X)
 print("Predicted:\n", predicted_0)
 print("Expected:\n", np.array([[0.99930437], [1.0], [1.0]]))
 
 # Example 1: Loss
+print("\n-------------\n")
 print("\nExample 1:")
 loss_1 = mylr.loss_(X, Y)  # should be y and y_hat???
 print("Loss:", loss_1)
 print("Expected Loss:", 11.513157421577004)
 
 # Example 2: Fit and updated theta
+print("\n-------------\n")
 print("\nExample 2:")
 mylr.fit_(X, Y)
 updated_theta_2 = mylr.theta
@@ -32,12 +35,14 @@ print(
 )
 
 # Example 3: Predict after fitting
+print("\n-------------\n")
 print("\nExample 3:")
 predicted_3 = mylr.predict_(X)
 print("Predicted after fitting:\n", predicted_3)
 print("Expected:\n", np.array([[0.57606717], [0.68599807], [0.06562156]]))
 
 # Example 4: Loss after fitting
+print("\n-------------\n")
 print("\nExample 4:")
 loss_4 = mylr.loss_(X, Y)
 print("Loss after fitting:", loss_4)
