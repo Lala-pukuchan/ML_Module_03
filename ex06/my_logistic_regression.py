@@ -129,7 +129,7 @@ class MyLogisticRegression:
         # compute loss
         loss_elem = self.loss_elem_(y, y_hat)
         m = x.shape[0]
-        return -np.sum(loss_elem) / m
+        return (-1) * np.sum(loss_elem) / m
 
     def vec_log_gradient_(self, x, y):
         """
