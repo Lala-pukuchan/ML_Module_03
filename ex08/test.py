@@ -46,3 +46,41 @@ print("Recall - sklearn Implementation:", recall_score(y, y_hat, pos_label="dog"
 # F1-score
 print("F1 Score - Your Implementation:", f1_score_(y, y_hat, pos_label="dog"))
 print("F1 Score - sklearn Implementation:", f1_score(y, y_hat, pos_label="dog"))
+
+# Example 3:
+y_hat = np.array(
+    ["norminet", "dog", "norminet", "norminet", "dog", "dog", "dog", "dog"]
+)
+y = np.array(
+    ["dog", "dog", "norminet", "norminet", "dog", "norminet", "dog", "norminet"]
+)
+
+# Precision for 'norminet'
+print(
+    "Precision ('norminet') - Your Implementation:",
+    precision_score_(y, y_hat, pos_label="norminet"),
+)
+print(
+    "Precision ('norminet') - sklearn Implementation:",
+    precision_score(y, y_hat, pos_label="norminet"),
+)
+
+# Recall for 'norminet'
+print(
+    "Recall ('norminet') - Your Implementation:",
+    recall_score_(y, y_hat, pos_label="norminet"),
+)
+print(
+    "Recall ('norminet') - sklearn Implementation:",
+    recall_score(y, y_hat, pos_label="norminet"),
+)
+
+# F1-score for 'norminet'
+print(
+    "F1 Score ('norminet') - Your Implementation:",
+    f1_score_(y, y_hat, pos_label="norminet"),
+)
+print(
+    "F1 Score ('norminet') - sklearn Implementation:",
+    f1_score(y, y_hat, pos_label="norminet"),
+)
