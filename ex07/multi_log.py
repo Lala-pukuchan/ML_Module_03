@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 from ex06.my_logistic_regression import MyLogisticRegression as MyLR
 
 
-
 def data_spliter(x, y, proportion, seed=42):
     """
     Shuffles and splits the dataset (given by x and y) into a training and a test set,
@@ -30,7 +29,7 @@ def data_spliter(x, y, proportion, seed=42):
         return None
     if x.size == 0 or y.size == 0 or x.shape[0] != y.shape[0]:
         return None
-    
+
     # using the same random seed for reproducibility
     np.random.seed(seed)
 
@@ -119,7 +118,6 @@ def multi_log():
     print("Total Predictions:", total_predictions)
     print("Accuracy:", accuracy)
 
-
     # Plotting
     feature_pairs = [
         ("weight", "height"),
@@ -137,10 +135,13 @@ def multi_log():
         # actual
         plt.subplot(1, 2, 1)
         for class_index in range(5):
-                    mask = y_test == class_index
-                    plt.scatter(x_test[mask, feature_index_1],
-                                x_test[mask, feature_index_2],
-                                label=f"Actual Class {class_index}", alpha=0.5)
+            mask = y_test == class_index
+            plt.scatter(
+                x_test[mask, feature_index_1],
+                x_test[mask, feature_index_2],
+                label=f"Actual Class {class_index}",
+                alpha=0.5,
+            )
         plt.xlabel(pair[0])
         plt.ylabel(pair[1])
         plt.title(f"{pair[0]} vs {pair[1]}: Actual Classes")
@@ -150,16 +151,18 @@ def multi_log():
         plt.subplot(1, 2, 2)
         for class_index in range(5):
             mask = predicted_classes == class_index
-            plt.scatter(x_test[mask, feature_index_1],
-                        x_test[mask, feature_index_2],
-                        label=f"Predicted Class {class_index}", alpha=0.5)
+            plt.scatter(
+                x_test[mask, feature_index_1],
+                x_test[mask, feature_index_2],
+                label=f"Predicted Class {class_index}",
+                alpha=0.5,
+            )
         plt.xlabel(pair[0])
         plt.ylabel(pair[1])
         plt.title(f"{pair[0]} vs {pair[1]}: Predicted Classes")
         plt.legend()
         plt.savefig(f"results/ex07/multi_figure_{pair[0]}_vs_{pair[1]}.png")
         plt.close()
-
 
 
 def main():

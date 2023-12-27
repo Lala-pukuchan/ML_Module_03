@@ -100,7 +100,11 @@ def mono_log(zipcode):
     print("Accuracy:\n", accuracy)
 
     # plotting
-    feature_pairs = [("weight", "height"), ("weight", "bone_density"), ("height", "bone_density")]
+    feature_pairs = [
+        ("weight", "height"),
+        ("weight", "bone_density"),
+        ("height", "bone_density"),
+    ]
     feature_indices = {"weight": 0, "height": 1, "bone_density": 2}
 
     for pair in feature_pairs:
@@ -111,14 +115,28 @@ def mono_log(zipcode):
 
         # Plot for Actual Zip Code
         plt.subplot(1, 2, 1)
-        plt.scatter(x_test[:, feature_index_1], x_test[:, feature_index_2], c=y_test.flatten(), cmap='winter', edgecolor='k', s=50)
+        plt.scatter(
+            x_test[:, feature_index_1],
+            x_test[:, feature_index_2],
+            c=y_test.flatten(),
+            cmap="winter",
+            edgecolor="k",
+            s=50,
+        )
         plt.xlabel(pair[0])
         plt.ylabel(pair[1])
         plt.title(f"Actual Zip Code: {pair[0]} vs {pair[1]}")
-        
+
         # Plot for Predicted Zip Code
         plt.subplot(1, 2, 2)
-        plt.scatter(x_test[:, feature_index_1], x_test[:, feature_index_2], c=predicted_labels.flatten(), cmap='autumn', edgecolor='k', s=50)
+        plt.scatter(
+            x_test[:, feature_index_1],
+            x_test[:, feature_index_2],
+            c=predicted_labels.flatten(),
+            cmap="autumn",
+            edgecolor="k",
+            s=50,
+        )
         plt.xlabel(pair[0])
         plt.ylabel(pair[1])
         plt.title(f"Predicted Zip Code: {pair[0]} vs {pair[1]}")
@@ -126,7 +144,6 @@ def mono_log(zipcode):
         plt.suptitle(f"Actual vs Predicted Zip Code Comparison: {pair[0]} vs {pair[1]}")
         plt.savefig(f"results/ex07/mono_figure_{pair[0]}_vs_{pair[1]}.png")
         plt.close()
-
 
 
 def main():
