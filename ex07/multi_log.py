@@ -103,18 +103,18 @@ def multi_log():
     print("First few predicted classes:\n", predicted_classes[:5])
 
     # Split data
-    y_test = y_test.astype(int)
+    y_test = y_test.astype(int).flatten()
 
     # After converting y_test to int
     print("y_test:", y_test.flatten())
     print("predicted_classes:", predicted_classes)
 
     # Calculate correct predictions
-    correct_predictions = np.sum(y_test.flatten() == predicted_classes)
+    correct_predictions = np.sum(y_test == predicted_classes)
     print("correct_predictions:", correct_predictions)
 
     # Calculate total predictions and accuracy
-    total_predictions = len(y_test.flatten())
+    total_predictions = len(y_test)
     accuracy = correct_predictions / total_predictions
     print("Total Predictions:", total_predictions)
     print("Accuracy:", accuracy)
@@ -132,7 +132,22 @@ def multi_log():
         feature_index_1 = feature_indices[pair[0]]
         feature_index_2 = feature_indices[pair[1]]
 
-        plt.figure(figsize=(8, 6))
+        plt.figure(figsize=(12, 6))
+
+        # actual
+        plt.subplot(1, 2, 1)
+        for class_index in range(5):
+                    mask = y_test == class_index
+                    plt.scatter(x_test[mask, feature_index_1],
+                                x_test[mask, feature_index_2],
+                                label=f"Actual Class {class_index}", alpha=0.5)
+        plt.xlabel(pair[0])
+        plt.ylabel(pair[1])
+        plt.title(f"{pair[0]} vs {pair[1]}: Actual Classes")
+        plt.legend()
+
+        # predict
+        plt.subplot(1, 2, 2)
         for class_index in range(5):
             mask = predicted_classes == class_index
             plt.scatter(x_test[mask, feature_index_1],
